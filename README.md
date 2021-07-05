@@ -1,6 +1,6 @@
 # aligent3
  Takes upto 3 inputs and returns day count in Y, H, I, S
-[Yettey74@github](https://www.github.com/yettey74/aligent2 "Aligent2") 
+[Yettey74@github](https://www.github.com/yettey74/aligent3 "Aligent3") 
 ### Created 05/07/2021
 ### Author Scot Henderson
 ***
@@ -116,20 +116,43 @@
 * Updated ``` _daysBetween() ``` <br> Added PHP DOCS stub <br> Time is spliced on the fly<br> Handles Leap year
 * Updated ``` _weekdays() ``` <br> Added PHP DOCS stub <br> Time is spliced on the fly<br> Handles Leap year
 * Updated ``` _completeWeeks() ``` <br> Added PHP DOCS stub <br> Time is spliced on the fly<br> Handles Leap year
-
 #### test.php
 * Added ``` Same Day and Next Day complete test blocks ```
 * Added ``` Years to each test block ```
 #### Updated MarkDown File
 #### README.md
-
+***
+***
+## Version 0.2.0
+### Implements Throwable
+### TEST = 232 / 98.71% Successs
+#### aligent.class.php
+* Added ``` _dateConverter() ``` <br> Implements throwable dates to handle int, string, object
+* Updated ``` _totalDays() ``` <br> Implenments throwable to scrub dates
+#### test.php
+* Added ``` Single test LIMITS days between ``` <br> Return correct days
+* Added ``` Single test LIMITS  weekday ``` <br> Return correct days
+* Added ``` Single test LIMITS complete weeks ``` <br> Return correct days
+* Added ``` Single test ZERO days between ``` <br> Return correct days
+* Added ``` Single test ZERO  weekday ``` <br> Return correct days
+* Added ``` Single test ZERO complete weeks ``` <br> Return correct days
+#### Updated MarkDown File
+#### README.md
+***
+***
 ## Error Log
 * E1 Days returns as 2 when Friday start and tueday end
 * E2 731 Days Leap Year test set .. need to check result
 * E3 Returns wrong count when days < 8
 * E4 Returns wrong count when Year has Feb-29
+* E5 Return d_wd_limit      Expect = 4189809 Result = 4189811 (there are 4014 leaps)
+* E6 Returns d_zero	        Expect = 1, Return = 0
+* E7 Returns d_wd_zero_3	Expect = 1, Return = 2
+* E8 Returns d_cw_zero_3    Expect = 1, Return = 0
 
 ## Whishlist
+* Handles UNIX time
+* Handles String date
 
 ## Attended
 1. Scaffold Built

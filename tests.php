@@ -617,10 +617,68 @@ $d_wd_fri_m = $aligent->_weekdays( $date1, $date2, 2 ); //
 $d_wd_fri_h = $aligent->_weekdays( $date1, $date2, 3 ); //
 ( $d_wd_fri_h == 24 * 4 )? $pass++: array_push( $failarray, ['d_wd_fri_h', 24 * 4 , $d_wd_fri_h ]);
 
+
+////////////////////////////////////////////
+//         Single test LIMITS             ///
+//  Start = -6060-03-01  End = 9999-12-31  ///
+///////////////////////////////////////////////
+$date1 = new DateTime( "-6060-03-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date2 = new DateTime( "9999-12-31T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+
+$d_limit = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_limit == 5865733 )? $pass++: array_push( $failarray, ['d_limit', 5865733 , $d_limit ]);
+$d_wd_limit = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_limit == 4189809 )? $pass++: array_push( $failarray, ['d_wd_limit', 4189809 , $d_wd_limit ]);
+$d_cw_limit = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_limit == 837961 )? $pass++: array_push( $failarray, ['d_cw_limit', 837961 , $d_cw_limit ]);
+
+////////////////////////////////////////////
+//         Single test ZERO               ///
+//  Start = 0000-00-00  End = 0000-00-00   ///
+///////////////////////////////////////////////
+$date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date2 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+
+$d_zero = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_zero == 0 )? $pass++: array_push( $failarray, ['d_zero', 0 , $d_zero ]);
+$d_wd_zero = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_zero == 0 )? $pass++: array_push( $failarray, ['d_wd_zero', 0 , $d_wd_zero ]);
+$d_cw_zero = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_zero == 0 )? $pass++: array_push( $failarray, ['d_cw_zero', 0 , $d_cw_zero ]);
+
+////////////////////////////////////////////
+//         Single test ZERO+3             ///
+//  Start = 0000-00-00  End = 0000-00-00   ///
+///////////////////////////////////////////////
+$date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date2 = new DateTime( "0000-00-03T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+
+echo ( $date1 )->format('c');
+echo '<br>';
+echo ( $date2 )->format('c');
+
+$d_zero_3 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_zero', 1 , $d_zero ]);
+$d_wd_zero_3 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_wd_zero_3', 1 , $d_wd_zero_3 ]);
+$d_cw_zero_3 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_cw_zero_3', 1 , $d_cw_zero_3 ]);
+
+/////////////////////////////////////////////
+//         Single test OOB                 ///
+//  Start = -6060-02-29  End = 10000-01-01  ///
+////////////////////////////////////////////////
+/* $date1 = new DateTime( "-6060-02-29T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date2 = new DateTime( "10000-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+
+$d_oob = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_oob == 5865733 )? $pass++: array_push( $failarray, ['d_oob', 5865733 , $d_oob ]); */
+
 ############################################
 ##              RESULTS SCREEN            ##
 ############################################ 
-$row = 0;?>
+$row = 0;
+?>
 <table>
 <tr>
     <td>Total tests</td>
