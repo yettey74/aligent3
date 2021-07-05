@@ -55,9 +55,24 @@
 * Add ``` +5 Days in Days, WeekDays, Complete Weeks ```
 * Add ``` +6 Days in Days, WeekDays, Complete Weeks ```
 * Add ``` +7 Days in Days, WeekDays, Complete Weeks ```
-
+#### Updated MarkDown File
+#### README.md
+***
+## Version 0.1.2
+### Handling 14 ~ 720 Days including leap year tests 
+### TEST = 36
+#### test.php
+* Add ``` +8 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +15 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +365 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +365 Leapyear Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +730 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +731 Leapyear Days in Days, WeekDays, Complete Weeks ```
+#### Updated MarkDown File
+#### README.md
 ## Error Log
 * E1 Days returns as 2 when Friday start and tueday end
+* E2 731 Days Leap Year test set .. need to check result
 
 ## Whishlist
 

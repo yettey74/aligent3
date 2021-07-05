@@ -111,6 +111,84 @@ $d_wd_7 = $aligent->_weekdays( $date1, $date2 ); //
 $d_cw_7 = $aligent->_completeWeeks( $date1, $date2 ); //
 ( $d_cw_7 == 0 )? $pass++: array_push( $failarray, ['d_cw_7', 0, $d_cw_7 ]);
 
+/////////////////////////////////////
+//              8 Days             ///
+///////////////////////////////////////
+$date1 = new DateTime( "1988-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Monday
+$date2 = new DateTime( "1988-01-12T00:00:00Z", new DateTimeZone( "UTC" ) ); //Tuesday
+
+$d_td_8 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_8 == 7 )? $pass++: array_push( $failarray, ['d_td_8', 7, $d_td_8 ]);
+$d_wd_8 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_8 == 5 )? $pass++: array_push( $failarray, ['d_wd_8', 5, $d_wd_8 ]);
+$d_cw_8 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_8 == 1 )? $pass++: array_push( $failarray, ['d_cw_8', 1, $d_cw_8 ]);
+
+/////////////////////////////////////
+//              15 Days             ///
+///////////////////////////////////////
+$date1 = new DateTime( "1988-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Monday
+$date2 = new DateTime( "1988-01-19T00:00:00Z", new DateTimeZone( "UTC" ) ); //Tuesday
+
+$d_td_15 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_15 == 14 )? $pass++: array_push( $failarray, ['d_td_15', 14, $d_td_15 ]);
+$d_wd_15 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_15 == 10 )? $pass++: array_push( $failarray, ['d_wd_15', 10, $d_wd_15 ]);
+$d_cw_15 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_15 == 2 )? $pass++: array_push( $failarray, ['d_cw_15', 2, $d_cw_15 ]);
+
+/////////////////////////////////////
+//              365 Days           ///
+///////////////////////////////////////
+$date1 = new DateTime( "1989-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Monday
+$date2 = new DateTime( "1990-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Tuesday
+
+$d_td_365 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_365 == 364 )? $pass++: array_push( $failarray, ['d_td_365', 364, $d_td_365 ]);
+$d_wd_365 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_365 == 260 )? $pass++: array_push( $failarray, ['d_wd_365', 260, $d_wd_365 ]);
+$d_cw_365 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_365 == 52 )? $pass++: array_push( $failarray, ['d_cw_365', 52, $d_cw_365 ]);
+
+/////////////////////////////////////
+//         365 Days Leap Year      ///
+///////////////////////////////////////
+$date1 = new DateTime( "1988-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Monday
+$date2 = new DateTime( "1989-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Tuesday
+
+$d_td_365_leap = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_365_leap == 365 )? $pass++: array_push( $failarray, ['d_td_365_leap', 365, $d_td_365_leap ]);
+$d_wd_365_leap = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_365_leap == 261 )? $pass++: array_push( $failarray, ['d_wd_365_leap', 261, $d_wd_365_leap ]);
+$d_cw_365_leap = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_365_leap == 52 )? $pass++: array_push( $failarray, ['d_cw_365_leap', 52, $d_cw_365_leap ]);
+
+/////////////////////////////////////
+//              730 Days           ///
+///////////////////////////////////////
+$date1 = new DateTime( "1989-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Monday
+$date2 = new DateTime( "1991-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Tuesday
+
+$d_td_730 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_730 == 729 )? $pass++: array_push( $failarray, ['d_td_730', 729, $d_td_730 ]);
+$d_wd_730 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_730 == 521 )? $pass++: array_push( $failarray, ['d_wd_730', 521, $d_wd_730 ]);
+$d_cw_730 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_730 == 104 )? $pass++: array_push( $failarray, ['d_cw_730', 104, $d_cw_730 ]);
+
+/////////////////////////////////////
+//         731 Days Leap Year      ///
+///////////////////////////////////////
+$date1 = new DateTime( "1988-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Monday
+$date2 = new DateTime( "1990-01-04T00:00:00Z", new DateTimeZone( "UTC" ) ); //Tuesday
+
+$d_td_730_leap = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_730_leap == 730 )? $pass++: array_push( $failarray, ['d_td_730_leap', 730, $d_td_730_leap ]);
+$d_wd_730_leap = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_730_leap == 522 )? $pass++: array_push( $failarray, ['d_wd_730_leap', 522, $d_wd_730_leap ]);
+$d_cw_730_leap = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_730_leap == 104 )? $pass++: array_push( $failarray, ['d_cw_730_leap', 104, $d_cw_730_leap ]);
+
 ############################################
 ##              RESULTS SCREEN            ##
 ############################################ 
