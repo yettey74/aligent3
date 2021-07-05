@@ -38,15 +38,31 @@
 * Updated ``` _weekdays() ``` <br> Return weekdays
 * Updated ``` _completeWeeks() ``` <br> Return complete weeks
 #### test.php
-* Add ``` Single Test harness for Same Day in Days, WeekDays, Complete Weeks ```
+* Add ``` Same Day in Days, WeekDays, Complete Weeks ```
 #### Updated MarkDown File
 #### README.md
 ***
+## Version 0.1.1
+### Handling 7 Days
+### TEST = 24
+#### aligent.class.php
+* Updated ``` _weekdays() ``` <br> Handling Start = Friday && End == Monday || Tuesday where days < 7.  Now returns 0
+#### test.php
+* Add ``` Next Day in Days, WeekDays, Complete Weeks ```
+* Add ``` +2 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +3 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +4 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +5 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +6 Days in Days, WeekDays, Complete Weeks ```
+* Add ``` +7 Days in Days, WeekDays, Complete Weeks ```
 
 ## Error Log
+* E1 Days returns as 2 when Friday start and tueday end
 
 ## Whishlist
 
 ## Attended
 1. Scaffold Built
+2. Testing with start = Monday 04/01/1988 ( Helps with leap year testing and years > 1000 )
+3. E1 Days returns 0
 

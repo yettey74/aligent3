@@ -19,9 +19,10 @@ Class Aligent extends DateTime
         $days = $this->_daysBetween( $date1, $date2 );
         $weeks_difference = floor( $days / 7 ); // Define Days as Weeks
         $days_remainder = floor( $days % 7 ); // Define total days left over
+        
         $weekday_start = ( $date1 )->format( 'w' ); // Define start day as INT
         $weekday_end = ( $date2 )->format( 'w' ); // Define end day as INT
-        $weekdays = ($weeks_difference * 5 ) + $days_remainder ;
+        
         if( $weekday_start == 5 && $weekday_end == 1 && $days < 4 ){ // specifically looking at Fri-Mon           
             return 0;
         } 
@@ -29,20 +30,24 @@ Class Aligent extends DateTime
         if( $weekday_start == 5 && $weekday_end == 2 && $days < 5 ){ // specifically looking at Fri-Tues           
             return 0;
         } 
-
-        if(  0 < $weekday_start && $weekday_start < 6 ){ // if between day = 0 (sunday) and day = 6 (saturday)
-            if( $weekdays > 0 ){
-                $weekdays--;
-            }
-        }
+        
         if( $days_remainder > 7 ){
             $days_remainder--;
         }
+
         if( $days_remainder > 6 ){
             $days_remainder--;
         }      
 
-        return $days;
+        $weekdays = ($weeks_difference * 5 ) + $days_remainder ;
+
+     /*    if(  0 < $weekday_start && $weekday_start < 6 ){ // if between day = 0 (sunday) and day = 6 (saturday)
+            if( $weekdays > 0 ){
+                $weekdays--;
+            }
+        } */
+
+        return $weekdays;
     }
 
     Public function _completeWeeks( $date1, $date2, $flag = '' ){
