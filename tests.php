@@ -428,6 +428,85 @@ $d_cw_731_leap_m = $aligent->_completeWeeks( $date1, $date2, 2 ); //
 $d_cw_731_leap_h = $aligent->_completeWeeks( $date1, $date2, 3 ); //
 ( $d_cw_731_leap_h == 24 * 7 * 104  )? $pass++: array_push( $failarray, ['d_cw_731_leap_h', 24 * 7 * 104 , $d_cw_731_leap_h ]);
 
+/////////////////////////////////////
+//         Single test < 7 Days    ///
+//  Start = Friday  End = Monday    ///
+////////////////////////////////////////
+$date1 = new DateTime( "1988-01-08T00:00:00Z", new DateTimeZone( "UTC" ) ); //Friday
+$date2 = new DateTime( "1988-01-11T00:00:00Z", new DateTimeZone( "UTC" ) ); //Monday
+
+$d_wd_fri_mon = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_fri_mon == 0 )? $pass++: array_push( $failarray, ['d_wd_fri_mon', 0 , $d_wd_fri_mon ]);
+$d_wd_fri_mon_s = $aligent->_weekdays( $date1, $date2, 1 ); //
+( $d_wd_fri_mon_s == 86400 * 0  )? $pass++: array_push( $failarray, ['d_wd_fri_mon_s', 86400 * 0 , $d_wd_fri_mon_s ]);
+$d_wd_fri_mon_m = $aligent->_weekdays( $date1, $date2, 2 ); //
+( $d_wd_fri_mon_m == 1400 * 0 )? $pass++: array_push( $failarray, ['d_wd_fri_mon_m', 1400 * 0 , $d_wd_fri_mon_m ]);
+$d_wd_fri_mon_h = $aligent->_weekdays( $date1, $date2, 3 ); //
+( $d_wd_fri_mon_h == 24 * 0 )? $pass++: array_push( $failarray, ['d_wd_fri_mon_h', 24 * 0 , $d_wd_fri_mon_h ]);
+
+/////////////////////////////////////
+//         Single test < 7 Days    ///
+//  Start = Friday  End = Teusday   ///
+////////////////////////////////////////
+$date1 = new DateTime( "1988-01-08T00:00:00Z", new DateTimeZone( "UTC" ) ); //Friday
+$date2 = new DateTime( "1988-01-12T00:00:00Z", new DateTimeZone( "UTC" ) ); //Tuesday
+
+$d_wd_fri_tue = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_fri_tue == 1 )? $pass++: array_push( $failarray, ['d_wd_fri_tue', 1 , $d_wd_fri_tue ]);
+$d_wd_fri_tue_s = $aligent->_weekdays( $date1, $date2, 1 ); //
+( $d_wd_fri_tue_s == 86400 * 1 )? $pass++: array_push( $failarray, ['d_wd_fri_tue_s', 86400 * 1 , $d_wd_fri_tue_s ]);
+$d_wd_fri_tue_m = $aligent->_weekdays( $date1, $date2, 2 ); //
+( $d_wd_fri_tue_m == 1400 * 1 )? $pass++: array_push( $failarray, ['d_wd_fri_tue_m', 1400 * 1 , $d_wd_fri_tue_m ]);
+$d_wd_fri_tue_h = $aligent->_weekdays( $date1, $date2, 3 ); //
+( $d_wd_fri_tue_h == 24 * 1 )? $pass++: array_push( $failarray, ['d_wd_fri_tue_h', 24 * 1 , $d_wd_fri_tue_h ]);
+
+///////////////////////////////////////
+//         Single test < 7 Days      ///
+//  Start = Friday  End = Wednesday   ///
+//////////////////////////////////////////
+$date1 = new DateTime( "1988-01-08T00:00:00Z", new DateTimeZone( "UTC" ) ); //Friday
+$date2 = new DateTime( "1988-01-13T00:00:00Z", new DateTimeZone( "UTC" ) ); //Wednesday
+
+$d_wd_fri_wed = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_fri_wed == 2 )? $pass++: array_push( $failarray, ['d_wd_fri_wed', 2 , $d_wd_fri_wed ]);
+$d_wd_fri_wed_s = $aligent->_weekdays( $date1, $date2, 1 ); //
+( $d_wd_fri_wed_s == 86400 * 2 )? $pass++: array_push( $failarray, ['d_wd_fri_wed_s', 86400 * 2 , $d_wd_fri_wed_s ]);
+$d_wd_fri_wed_m = $aligent->_weekdays( $date1, $date2, 2 ); //
+( $d_wd_fri_wed_m == 1400 * 2 )? $pass++: array_push( $failarray, ['d_wd_fri_wed_m', 1400 * 2 , $d_wd_fri_wed_m ]);
+$d_wd_fri_wed_h = $aligent->_weekdays( $date1, $date2, 3 ); //
+( $d_wd_fri_wed_h == 24 * 2 )? $pass++: array_push( $failarray, ['d_wd_fri_wed_h', 24 * 2 , $d_wd_fri_wed_h ]);
+
+///////////////////////////////////////
+//         Single test < 7 Days      ///
+//  Start = Friday  End = Thursday    ///
+//////////////////////////////////////////
+$date1 = new DateTime( "1988-01-08T00:00:00Z", new DateTimeZone( "UTC" ) ); //Friday
+$date2 = new DateTime( "1988-01-14T00:00:00Z", new DateTimeZone( "UTC" ) ); //Thursday
+
+$d_wd_fri_thur = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_fri_thur == 3 )? $pass++: array_push( $failarray, ['d_wd_fri_thur', 3 , $d_wd_fri_thur ]);
+$d_wd_fri_thur_s = $aligent->_weekdays( $date1, $date2, 1 ); //
+( $d_wd_fri_thur_s == 86400 * 3 )? $pass++: array_push( $failarray, ['d_wd_fri_thur_s', 86400 * 3 , $d_wd_fri_thur_s ]);
+$d_wd_fri_thur_m = $aligent->_weekdays( $date1, $date2, 2 ); //
+( $d_wd_fri_thur_m == 1400 * 3 )? $pass++: array_push( $failarray, ['d_wd_fri_thur_m', 1400 * 3 , $d_wd_fri_thur_m ]);
+$d_wd_fri_thur_h = $aligent->_weekdays( $date1, $date2, 3 ); //
+( $d_wd_fri_thur_h == 24 * 3 )? $pass++: array_push( $failarray, ['d_wd_fri_thur_h', 24 * 3 , $d_wd_fri_thur_h ]);
+
+///////////////////////////////////////
+//         Single test < 8 Days      ///
+//  Start = Friday  End = Friday      ///
+//////////////////////////////////////////
+$date1 = new DateTime( "1988-01-08T00:00:00Z", new DateTimeZone( "UTC" ) ); //Friday
+$date2 = new DateTime( "1988-01-15T00:00:00Z", new DateTimeZone( "UTC" ) ); //Friday
+
+$d_wd_fri = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_fri == 4 )? $pass++: array_push( $failarray, ['d_wd_fri', 4  , $d_wd_fri ]);
+$d_wd_fri_s = $aligent->_weekdays( $date1, $date2, 1 ); //
+( $d_wd_fri_s == 86400 * 4 )? $pass++: array_push( $failarray, ['d_wd_fri_s', 86400 * 4 , $d_wd_fri_s ]);
+$d_wd_fri_m = $aligent->_weekdays( $date1, $date2, 2 ); //
+( $d_wd_fri_m == 1400 * 4 )? $pass++: array_push( $failarray, ['d_wd_fri_m', 1400 * 4 , $d_wd_fri_m ]);
+$d_wd_fri_h = $aligent->_weekdays( $date1, $date2, 3 ); //
+( $d_wd_fri_h == 24 * 4 )? $pass++: array_push( $failarray, ['d_wd_fri_h', 24 * 4 , $d_wd_fri_h ]);
 
 ############################################
 ##              RESULTS SCREEN            ##

@@ -35,13 +35,25 @@ Class Aligent extends DateTime
         $weekday_start = ( $date1 )->format( 'w' ); // Define start day as INT
         $weekday_end = ( $date2 )->format( 'w' ); // Define end day as INT
         
-        if( $weekday_start == 5 && $weekday_end == 1 && $days < 4 ){ // specifically looking at Fri-Mon           
+        if( $weekday_start == 5 && $weekday_end == 1 && $days < 8 ){ // specifically looking at Fri-Mon           
             return 0;
         } 
         
-        if( $weekday_start == 5 && $weekday_end == 2 && $days < 5 ){ // specifically looking at Fri-Tues           
-            return 0;
-        } 
+        if( $weekday_start == 5 && $weekday_end == 2 && $days < 8 ){ // specifically looking at Fri-Tues           
+            return 1 * $splice;
+        }
+
+        if( $weekday_start == 5 && $weekday_end == 3 && $days < 8 ){ // specifically looking at Fri-Wed           
+            return 2 * $splice;
+        }
+
+        if( $weekday_start == 5 && $weekday_end == 4 && $days < 8 ){ // specifically looking at Fri-Thurs           
+            return 3 * $splice;
+        }
+
+        if( $weekday_start == 5 && $weekday_end == 5 && $days < 8 ){ // specifically looking at Fri-Fri           
+            return 4 * $splice;
+        }
         
         if( $days_remainder > 7 ){
             $days_remainder--;
@@ -52,12 +64,6 @@ Class Aligent extends DateTime
         }      
 
         $weekdays = ($weeks_difference * 5 ) + $days_remainder ;
-
-     /*    if(  0 < $weekday_start && $weekday_start < 6 ){ // if between day = 0 (sunday) and day = 6 (saturday)
-            if( $weekdays > 0 ){
-                $weekdays--;
-            }
-        } */
 
         return $weekdays * $splice;
     }

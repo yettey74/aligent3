@@ -88,9 +88,30 @@
 * Add ``` +731 Leapyear Days with splice times ```
 #### Updated MarkDown File
 #### README.md
+***
+## Version 0.1.3
+### Handling Flag input of time
+### TEST = 158
+#### test.php
+* Add ``` Single test < 8 Days Friday - Monday ```
+* Add ``` Single test < 8 Days Friday - Tuesday ```
+#### Updated MarkDown File
+#### README.md
+***
+## Version 0.1.4
+### Handling Flag input of time
+### TEST = 170
+#### test.php
+* Add ``` Single test < 8 Days Friday - Wednesday ```
+* Add ``` Single test < 8 Days Friday - Thursday ```
+* Add ``` Single test < 8 Days Friday - Friday ```
+#### Updated MarkDown File
+#### README.md
+
 ## Error Log
 * E1 Days returns as 2 when Friday start and tueday end
 * E2 731 Days Leap Year test set .. need to check result
+* E3 Returns wrong count when days < 8
 
 ## Whishlist
 
@@ -99,4 +120,4 @@
 2. Testing with start = Monday 04/01/1988 ( Helps with leap year testing and years > 1000 )
 3. E1 Days returns 0
 4. E2 Days returns correct result
-
+5. E3 Days returns correct result
