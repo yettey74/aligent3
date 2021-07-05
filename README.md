@@ -26,7 +26,19 @@
 * Add ``` _weekdays() ```
 * Add ``` _completeWeeks() ```
 #### test.php
-* Add ``` Single Test herness added ```
+* Add ``` Single Test harness added ```
+#### Updated MarkDown File
+#### README.md
+***
+***
+## Version 0.1.0
+#### aligent.class.php
+* Add ``` _getSplice() ``` <br> Return an INT to handle flag call Y,H,I,S
+* Updated ``` _daysBetween() ``` <br> Returns days between
+* Updated ``` _weekdays() ``` <br> Return weekdays
+* Updated ``` _completeWeeks() ``` <br> Return complete weeks
+#### test.php
+* Add ``` Single Test harness for Same Day in Days, WeekDays, Complete Weeks ```
 #### Updated MarkDown File
 #### README.md
 ***
@@ -36,3 +48,5 @@
 ## Whishlist
 
 ## Attended
+1. Scaffold Built
+
