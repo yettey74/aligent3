@@ -107,11 +107,27 @@
 * Add ``` Single test < 8 Days Friday - Friday ```
 #### Updated MarkDown File
 #### README.md
+***
+## Version 0.1.5
+### Handling Flag input of time = Years
+### TEST = 223
+#### aligent.class.php
+* Added ``` _isLeap() ``` <br> Handles wrong result when leap year floor( 366 / 365 ) = 1
+* Updated ``` _daysBetween() ``` <br> Added PHP DOCS stub <br> Time is spliced on the fly<br> Handles Leap year
+* Updated ``` _weekdays() ``` <br> Added PHP DOCS stub <br> Time is spliced on the fly<br> Handles Leap year
+* Updated ``` _completeWeeks() ``` <br> Added PHP DOCS stub <br> Time is spliced on the fly<br> Handles Leap year
+
+#### test.php
+* Added ``` Same Day and Next Day complete test blocks ```
+* Added ``` Years to each test block ```
+#### Updated MarkDown File
+#### README.md
 
 ## Error Log
 * E1 Days returns as 2 when Friday start and tueday end
 * E2 731 Days Leap Year test set .. need to check result
 * E3 Returns wrong count when days < 8
+* E4 Returns wrong count when Year has Feb-29
 
 ## Whishlist
 
@@ -121,3 +137,4 @@
 3. E1 Days returns 0
 4. E2 Days returns correct result
 5. E3 Days returns correct result
+5. E4 Years returns correct result
