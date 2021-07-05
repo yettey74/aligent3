@@ -285,7 +285,7 @@ Class Aligent extends DateTime
             } catch ( Throwable $e ){
                 echo print_r( var_export( $e ) );
             } finally {
-                $thisDate = $thisDate->setTimezone(new DateTimeZone( "Europe/Paris" ));  
+                $thisDate = $thisDate->setTimezone(new DateTimeZone( "UTC" ));  
             }
             return $thisDate;
         }

@@ -139,6 +139,14 @@
 #### Updated MarkDown File
 #### README.md
 ***
+## Version 0.2.1
+### TEST = 232 / 98.71% Successs
+#### aligent.class.php
+* Updated ``` _dateConverter() ``` <br> now returns UTC instead of Europe/Paris
+#### test.php
+#### Updated MarkDown File
+#### README.md
+***
 ***
 ## Error Log
 * E1 Days returns as 2 when Friday start and tueday end
