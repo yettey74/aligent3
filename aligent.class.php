@@ -1,6 +1,66 @@
 <?php
 Class Aligent extends DateTime 
 {
+
+    /**
+     *  Return date as an object from Integer or String
+     * 
+     * @param Datetime|String|Integer $date1, $date2
+     * 
+     * @return Datetime
+     * 
+     */
+    Private function _dateTransform( $date ){
+        if( !( $date instanceof DateTime ) ){
+            //attempt transformation
+             if( is_int( $date ) ){
+                return new DateTime( date( 'Y-m-d', $date ), new DateTimeZone( "UTC" ) );
+            }
+ 
+            if( is_string( $date) ){
+                $date = $this->_stringScrubber( $date );
+                return new DateTime( date( 'Y-m-d', strtotime( $date ) ), new DateTimeZone( "UTC" ) );
+            }             
+        }
+
+        return $date;
+    }
+
+    /**
+     *  Return formatted String for transformation to DateTime
+     * 
+     * @param Datetime|String $date
+     * 
+     * @return String
+     * 
+     */
+    Private function _stringScrubber( $date ){
+         // lets start checking the date part first
+         if( strpos( $date, '/' ) == true ){
+            // lets change them to hyphens to be consistent
+            $date = str_replace( '/', '-', $date );
+        }
+
+        if( strpos( $date, '\\' ) == true ){
+            // lets change them to hyphens to be consistent
+            $date = str_replace( '\\', '-', $date );
+        }
+
+        // lets start checking the date part first
+        if( strpos( $date, ' ' ) == true ){
+            // lets change them to hyphens to be consistent
+            $date = str_replace( ' ', 'T', $date );
+        }
+
+        // lets start checking the date part first
+        if(strpos( $date, ',' ) == true ){
+            // lets change them to hyphens to be consistent
+            $date = str_replace( ',', '', $date );
+        }
+
+        return $date;
+    }
+
     /**
      *  Return Count of total days
      * 
@@ -10,23 +70,8 @@ Class Aligent extends DateTime
      * 
      */
     Private function _totalDays( $date1, $date2 ){
-        // We scrub the input passed here
-        // check if zero date 0000-00-00T00:00:00
-        if( !( $date1 instanceof DateTime ) ){
-            if( is_int( $date1 ) ){
-                $date1 = $this->_dateConverter( $date1 );
-            } else {
-                $date1 = new DateTime( $date1 );
-            }
-        }
-
-        if( !( $date2 instanceof DateTime ) ){
-            if( is_int( $date2 ) ){
-                $date2 = $this->_dateConverter( $date2 );
-            } else {
-                $date2 = new DateTime( $date2 );
-            }
-        }
+        $date1 = $this->_dateTransform( $date1 );
+        $date2 = $this->_dateTransform( $date2 );
 
         return $days = $date1->diff( $date2 )->format( '%a' );
     }
@@ -42,6 +87,9 @@ Class Aligent extends DateTime
      * 
      */
     Public function _daysBetween( $date1, $date2, $flag = '' ){
+        $date1 = $this->_dateTransform( $date1 );
+        $date2 = $this->_dateTransform( $date2 );
+
         $days = $this->_totalDays( $date1, $date2 ); // get the total days firt
 
         if( $days > 0 ){ // set correct mount of days between
@@ -67,7 +115,7 @@ Class Aligent extends DateTime
                         return floor( $days / $splice );
                     }    
                     break;
-                default: // days
+                default: // days dealt with outside switch
                     break;
             }
         } else { // we return in days only
@@ -87,7 +135,11 @@ Class Aligent extends DateTime
      * 
      */
     Public function _weekdays( $date1, $date2, $flag = '' ){
-        $days = $this->_totalDays( $date1, $date2 ); // get the total days firt
+        $date1 = $this->_dateTransform( $date1 );
+        $date2 = $this->_dateTransform( $date2 );
+        
+        $days = $this->_totalDays( $date1, $date2 ); // get the total days firt  
+
         $splice = ( is_int( $flag ) )? $this->_getSplice( $flag ) : 1; // we need it early this time so extra call on stack
         if( $days > 0 ){ // set correct mount of days between
             $days--;
@@ -136,23 +188,18 @@ Class Aligent extends DateTime
                 case 3: // hours
                     return $weekdays * $splice;
                     break;
-                case 4: // years 
-                    $days_adjust = 0;
-                    $leap_mod = ( $this->_getLeaps( $date1, $date2 ) % 8000 ); // accounts for math error in library
-                    if( $leap_mod > 42 ){ //acounts for accrual of leap remainder after 4 years
-                        $days_adjust = 1;
-                    }
+                case 4: // years accounts for math error in library                   
                     if( $this->_isLeapYear( $date1 ) == true || $this->_isLeapYear( $date2 ) ) {                      
                         if( floor( $weekdays / $splice ) > 0 ){
-                            return floor( $weekdays / $splice ) - 1 + $days_adjust;
+                            return floor( $weekdays / $splice ) - 1;
                         } else {
-                            return floor( $weekdays / $splice ) + $days_adjust;
+                            return floor( $weekdays / $splice );
                         }                        
                     } else {
-                        return floor( $weekdays / $splice ) + $days_adjust;
+                        return floor( $weekdays / $splice );
                     }                    
                     break;
-                default: // days
+                default: // days dealt with outside switch
                     break;
             }
         } else { // we return in days only
@@ -172,6 +219,8 @@ Class Aligent extends DateTime
      * 
      */
     Public function _completeWeeks( $date1, $date2, $flag = '' ){
+        $date1 = $this->_dateTransform( $date1 );
+        $date2 = $this->_dateTransform( $date2 );
 
         $days = $this->_totalDays( $date1, $date2 ); // get the total days firt
         
@@ -200,7 +249,7 @@ Class Aligent extends DateTime
                         return floor( ( $weeks * 7 ) / $splice );
                     }     
                     break;
-                default: // days
+                default: // days dealt with outside switch
                     break;
             } 
         } else { // we return in days only
@@ -241,117 +290,5 @@ Class Aligent extends DateTime
     Public function _isLeapYear( $date ){ 
         return $result = ( $date->format( 'Y' ) % 4 ); // use mod =4 to see if we are in a leap year 
     }
-
-    /**
-     *  Return if year is a leap year 
-     * 
-     * @param Datetime|String $date
-     * 
-     * @return Boolean
-     * 
-     */ 
-    Public function _getLeaps( $date1, $date2 ){ 
-        return $result = abs ( ( $date1 )->format('Y') - ( $date2 )->format('Y') );
-    }
-
-        /**
-     *  Checks the format of the string or object being passed in
-     *  If it is not correct then we will dry to transform it
-     *  If not then we can throw an exception and deal with that instead
-     * 
-     * @param Datetime|String $date
-     * 
-     * @return Datetime
-     * 
-     */
-    Public function _dateConverter( $date ){
-        $thisDate = new DateTime();
-
-        if( is_object( $date )){
-            try{
-                if( $date === false ){
-                    throw new Exception();
-                }
-            } catch( Throwable $e ) {
-
-            } finally {
-                $thisDate =  $date;
-            }
-            //get TZ info
-            try{
-                if( $thisDate->getTimezone() === false ) {
-                    throw new Exception();
-                } 
-            } catch ( Throwable $e ){
-                echo print_r( var_export( $e ) );
-            } finally {
-                $thisDate = $thisDate->setTimezone(new DateTimeZone( "UTC" ));  
-            }
-            return $thisDate;
-        }
-
-        // check if int and try
-        if( is_int( $date )){
-            try{    
-                if( new DateTime( date( 'Y-m-d', $date ), new DateTimeZone( "UTC" ) ) === false ){
-                    throw new Exception();
-                }
-            } catch( Throwable $e ) {
-
-            } finally {
-                return new DateTime( date( 'Y-m-d', $date  ), new DateTimeZone( "UTC" ) );
-            }
-        }      
-
-        if( is_string( $date )){
-            
-            $_isDateNull = ( $this->_isDateNull( $date ) )? true : false;
-            $date = $this->_getDate( $date );
-            if( $_isDateNull == true ){  // its just empty
-                return new DateTime( "0000-01-01T00:00:00Z", new DateTimeZone( "UTC" ) );
-            } 
-
-            if( $date instanceof DateTime && $_isDateNull == true){ // Bad date object
-                return new DateTime( "0000-01-01T00:00:00Z", new DateTimeZone( "UTC" ) );
-            }        
-
-            $hyphen = ( strpos( $date, '-' ) == true )? true : false;
-            $forwardslash = ( strpos( $date, '/' ) == true )? true : false;
-            $backslash = ( strpos( $date, '\\' ) == true )? true : false;
-            $colon = ( strpos( $date, ':' ) == true )? true : false;
-            $char_T = ( strpos( $date, 'T' ) == true )? true : false;
-            $char_z = ( strpos( $date, 'Z' ) == true )? true : false;
-            $plus = ( strpos( $date, '+' ) == true )? true : false;
-            $blank = ( strpos( $date, ' ' ) == true )? true : false;
-            $utc = ( strpos( $date, 'UTC' ) == true )? true : false;
-
-            // lets start checking the date part first
-            if( $forwardslash == true ){
-                // lets change them to hyphens to be consistent
-                $thisDate = str_replace( '/', '-', $thisDate );
-            }
-
-            if( $backslash == true ){
-                // lets change them to hyphens to be consistent
-                $thisDate = str_replace( '\\', '-', $thisDate );
-            }
-
-            // lets start checking the date part first
-            if( $utc == true ){
-                // lets change them to hyphens to be consistent
-                $thisDate = str_replace( 'UTC', 'T', $thisDate );
-            }
-
-            // lets start checking the date part first
-            if( $blank == true ){
-                // lets change them to hyphens to be consistent
-                $thisDate = str_replace( ' ', 'T', $thisDate );
-            }
-            $stringDate = new DateTime( $date );
-            return $stringDate;
-        }
-        return new DateTime( "0000-01-01T00:00:00Z", new DateTimeZone( "UTC" ) );
-    } 
-
 }
 ?>

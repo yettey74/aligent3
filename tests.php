@@ -101,7 +101,7 @@ $d_td_2_y = $aligent->_daysBetween( $date1, $date2, 4 ); //
 ( $d_td_2_y == 0 )? $pass++: array_push( $failarray, ['d_td_2_y', 0, $d_td_2_y ]);
 
 $d_wd_2 = $aligent->_weekdays( $date1, $date2 ); //
-( $d_wd_2 == 1 )? $pass++: array_push( $failarray, ['d_wd_2', 0, $d_wd_2 ]);
+( $d_wd_2 == 1 )? $pass++: array_push( $failarray, ['d_wd_2', 1, $d_wd_2 ]);
 $d_wd_2_s = $aligent->_weekdays( $date1, $date2, 1 ); //
 ( $d_wd_2_s == 86400 )? $pass++: array_push( $failarray, ['d_wd_2_s', 86400, $d_wd_2_s ]);
 $d_wd_2_m = $aligent->_weekdays( $date1, $date2, 2 ); //
@@ -628,15 +628,182 @@ $date2 = new DateTime( "9999-12-31T00:00:00Z", new DateTimeZone( "UTC" ) ); // F
 $d_limit = $aligent->_daysBetween( $date1, $date2 ); //
 ( $d_limit == 5865733 )? $pass++: array_push( $failarray, ['d_limit', 5865733 , $d_limit ]);
 $d_wd_limit = $aligent->_weekdays( $date1, $date2 ); //
-( $d_wd_limit == 4189809 )? $pass++: array_push( $failarray, ['d_wd_limit', 4189809 , $d_wd_limit ]);
+( $d_wd_limit == 4189811 )? $pass++: array_push( $failarray, ['d_wd_limit', 4189811 , $d_wd_limit ]);
 $d_cw_limit = $aligent->_completeWeeks( $date1, $date2 ); //
 ( $d_cw_limit == 837961 )? $pass++: array_push( $failarray, ['d_cw_limit', 837961 , $d_cw_limit ]);
+
+////////////////////////////////////////////
+//         Single test 100 Years          ///
+//  Start = 0001-01-01  End = 0101-01-01   ///
+///////////////////////////////////////////////
+$date1 = new DateTime( "0001-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date2 = new DateTime( "0101-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+
+$d_td_100_year = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_100_year == 36523 )? $pass++: array_push( $failarray, ['d_td_100_year', 36523 , $d_td_100_year ]);
+$d_wc_100_year = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wc_100_year == 26089 )? $pass++: array_push( $failarray, ['d_wc_100_year', 26089 , $d_wc_100_year ]);
+$d_cw_100_year = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_100_year == 5217 )? $pass++: array_push( $failarray, ['d_cw_100_year', 5217 , $d_cw_100_year ]);
+
+////////////////////////////////////////////
+//         Single test 1000 Years         ///
+//  Start = 0001-01-01  End = 1001-01-01   ///
+///////////////////////////////////////////////
+$date1 = new DateTime( "0001-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date2 = new DateTime( "1001-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+
+$d_td_1000_year = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_1000_year == 365241 )? $pass++: array_push( $failarray, ['d_td_1000_year', 365241 , $d_td_1000_year ]);
+$d_wc_1000_year = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wc_1000_year == 260887 )? $pass++: array_push( $failarray, ['d_wc_1000_year', 260887 , $d_wc_1000_year ]);
+$d_cw_1000_year = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_1000_year == 52177 )? $pass++: array_push( $failarray, ['d_cw_1000_year', 52177 , $d_cw_1000_year ]);
+
+////////////////////////////////////////
+//         Single test INT 0 Days     ///
+//  Start = 1989-01-01T00:00:00+00:00  ///  
+//  End   = 1990-01-01T00:00:00+00:00   ///
+/////////////////////////////////////////////
+$date1 = 599616000; // Friday 1989-01-01T00:00:00+00:00
+$date2 = 599616000; // Friday 1989-01-01T00:00:00+00:00
+$d_td_int_0 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_int_0 == 0 )? $pass++: array_push( $failarray, ['d_td_int_0', 0 , $d_td_int_0 ]);
+$d_wd_int_0 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_int_0 == 0 )? $pass++: array_push( $failarray, ['d_wd_int_0', 0 , $d_wd_int_0 ]);
+$d_cw_int_0 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_int_0 == 0 )? $pass++: array_push( $failarray, ['d_cw_int_0', 0 , $d_cw_int_0 ]);
+
+////////////////////////////////////////
+//         Single test INT 3 Days     ///
+//  Start = 1989-01-01T00:00:00+00:00  ///  
+//  End   = 1989-01-03T00:00:00+00:00   ///
+/////////////////////////////////////////////
+$date1 = 599616000; // Sunday 1989-01-01T00:00:00+00:00
+$date2 = 599788800; // Tuesday 1989-01-03T00:00:00+00:00
+$d_td_int_3 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_int_3 == 1 )? $pass++: array_push( $failarray, ['d_td_int_3', 1 , $d_td_int_3 ]);
+$d_wd_int_3 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_int_3 == 1 )? $pass++: array_push( $failarray, ['d_wd_int_3', 1 , $d_wd_int_3 ]);
+$d_cw_int_3 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_int_3 == 0 )? $pass++: array_push( $failarray, ['d_cw_int_3', 0 , $d_cw_int_3 ]);
+
+////////////////////////////////////////
+//         Single test INT 1 Years    ///
+//  Start = 1989-01-01T00:00:00+00:00  ///  
+//  End   = 1990-01-01T00:00:00+00:00   ///
+/////////////////////////////////////////////
+$date1 = 599616000; // Friday 0010-01-01T00:00:00+00:00
+$date2 = 631152000; // Friday 9999-12-31T00:00:00+00:00
+$d_td_int_1_year = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_int_1_year == 364 )? $pass++: array_push( $failarray, ['d_td_int_1_year', 364 , $d_td_int_1_year ]);
+$d_wd_int_1_year = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_int_1_year == 260 )? $pass++: array_push( $failarray, ['d_wd_int_1_year', 260 , $d_wd_int_1_year ]);
+$d_cw_int_1_year = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_int_1_year == 52 )? $pass++: array_push( $failarray, ['d_cw_int_1_year', 52 , $d_cw_int_1_year ]);
+
+///////////////////////////////////////////
+//         Single test STRING 0 Days     ///
+//  Start = 1989-01-01T00:00:00+00:00     ///  
+//  End   = 1989-01-01T00:00:00+00:00      ///
+///////////////////////////////////////////////
+$date1 = '1989-01-01T00:00:00+00:00'; //
+$date2 = '1989-01-01T00:00:00+00:00'; //
+$d_td_string_0 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_string_0 == 0 )? $pass++: array_push( $failarray, ['d_td_string_0', 0 , $d_td_string_0 ]);
+$d_wd_string_0 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_string_0 == 0 )? $pass++: array_push( $failarray, ['d_wd_string_0', 0 , $d_wd_string_0 ]);
+$d_cw_string_0 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_string_0 == 0 )? $pass++: array_push( $failarray, ['d_cw_string_0', 0 , $d_cw_string_0 ]);
+
+///////////////////////////////////////////
+//  Single test String 0 Days with ','   ///
+//  Start = 1989-01-01T00:00:00+00:00     ///  
+//  End   = 1990-01-01T00:00:00+00:00      ///
+///////////////////////////////////////////////
+$date1 = '599,616,000'; // Friday 1989-01-01T00:00:00+00:00
+$date2 = '599,616,000'; // Friday 1989-01-01T00:00:00+00:00
+$d_td_int_0 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_int_0 == 0 )? $pass++: array_push( $failarray, ['d_td_int_0', 0 , $d_td_int_0 ]);
+$d_wd_int_0 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_int_0 == 0 )? $pass++: array_push( $failarray, ['d_wd_int_0', 0 , $d_wd_int_0 ]);
+$d_cw_int_0 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_int_0 == 0 )? $pass++: array_push( $failarray, ['d_cw_int_0', 0 , $d_cw_int_0 ]);
+
+///////////////////////////////////////////
+//  Single test STRING 0 Days with '/'   ///
+//  Start = 1989-01-01T00:00:00+00:00     ///  
+//  End   = 1989-01-01T00:00:00+00:00      ///
+///////////////////////////////////////////////
+$date1 = '1989/01/01T00:00:00+00:00'; //
+$date2 = '1989/01/01T00:00:00+00:00'; //
+$d_td_forwardSlash_0 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_forwardSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_td_forwardSlash_0', 0 , $d_td_forwardSlash_0 ]);
+$d_wd_forwardSlash_0 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_forwardSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_wd_forwardSlash_0', 0 , $d_wd_forwardSlash_0 ]);
+$d_cw_forwardSlash_0 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_forwardSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_cw_forwardSlash_0', 0 , $d_cw_forwardSlash_0 ]);
+
+///////////////////////////////////////////
+//  Single test STRING 0 Days with '\'   ///
+//  Start = 1989-01-01T00:00:00+00:00     ///  
+//  End   = 1989-01-01T00:00:00+00:00      ///
+///////////////////////////////////////////////
+$date1 = '1989\01\01T00:00:00+00:00'; //
+$date2 = '1989\01\01T00:00:00+00:00'; //
+$d_td_backSlash_0 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_backSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_td_backSlash_0', 0 , $d_td_backSlash_0 ]);
+$d_wd_backSlash_0 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_backSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_wd_backSlash_0', 0 , $d_wd_backSlash_0 ]);
+$d_cw_backSlash_0 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_backSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_cw_backSlash_0', 0 , $d_cw_backSlash_0 ]);
+
+/////////////////////////////////////////////////
+//  Single test STRING 0 Days with T ommited   ///
+//  Start = 1989-01-01T00:00:00+00:00           ///  
+//  End   = 1989-01-01T00:00:00+00:00            ///
+/////////////////////////////////////////////////////
+$date1 = '1989\01\01 00:00:00+00:00'; //
+$date2 = '1989\01\01 00:00:00+00:00'; //
+$d_td_backSlash_0 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_backSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_td_backSlash_0', 0 , $d_td_backSlash_0 ]);
+$d_wd_backSlash_0 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_backSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_wd_backSlash_0', 0 , $d_wd_backSlash_0 ]);
+$d_cw_backSlash_0 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_backSlash_0 == 0 )? $pass++: array_push( $failarray, ['d_cw_backSlash_0', 0 , $d_cw_backSlash_0 ]);
+///////////////////////////////////////////
+//         Single test STRING 3 Days     ///
+//  Start = 1989-01-01T00:00:00+00:00     ///  
+//  End   = 1989-01-01T00:00:00+00:00      ///
+///////////////////////////////////////////////
+$date1 = '1989-01-01T00:00:00+00:00'; //
+$date2 = '1989-01-03T00:00:00+00:00'; //
+$d_td_string_3 = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_string_3 == 1 )? $pass++: array_push( $failarray, ['d_td_string_3', 1 , $d_td_string_3 ]);
+$d_wd_string_3 = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_string_3 == 1 )? $pass++: array_push( $failarray, ['d_wd_string_3', 1 , $d_wd_string_3 ]);
+$d_cw_string_3 = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_string_3 == 0 )? $pass++: array_push( $failarray, ['d_cw_string_3', 0 , $d_cw_string_3 ]);
+
+///////////////////////////////////////////
+//         Single test STRING 1 Years    ///
+//  Start = 1989-01-01T00:00:00+00:00     ///  
+//  End   = 1990-01-01T00:00:00+00:00      ///
+///////////////////////////////////////////////
+$date1 = '1989-01-01T00:00:00+00:00'; //
+$date2 = '1990-01-01T00:00:00+00:00'; //
+$d_td_string_1_year = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_string_1_year == 364 )? $pass++: array_push( $failarray, ['d_td_string_1_year', 364 , $d_td_string_1_year ]);
+$d_wd_string_1_year = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_string_1_year == 260 )? $pass++: array_push( $failarray, ['d_wd_string_1_year', 260 , $d_wd_string_1_year ]);
+$d_cw_string_1_year = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_string_1_year == 52 )? $pass++: array_push( $failarray, ['d_cw_string_1_year', 52 , $d_cw_string_1_year ]);
 
 ////////////////////////////////////////////
 //         Single test ZERO               ///
 //  Start = 0000-00-00  End = 0000-00-00   ///
 ///////////////////////////////////////////////
-$date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+/* $date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
 $date2 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
 
 $d_zero = $aligent->_daysBetween( $date1, $date2 ); //
@@ -644,25 +811,21 @@ $d_zero = $aligent->_daysBetween( $date1, $date2 ); //
 $d_wd_zero = $aligent->_weekdays( $date1, $date2 ); //
 ( $d_wd_zero == 0 )? $pass++: array_push( $failarray, ['d_wd_zero', 0 , $d_wd_zero ]);
 $d_cw_zero = $aligent->_completeWeeks( $date1, $date2 ); //
-( $d_cw_zero == 0 )? $pass++: array_push( $failarray, ['d_cw_zero', 0 , $d_cw_zero ]);
+( $d_cw_zero == 0 )? $pass++: array_push( $failarray, ['d_cw_zero', 0 , $d_cw_zero ]); */
 
 ////////////////////////////////////////////
 //         Single test ZERO+3             ///
 //  Start = 0000-00-00  End = 0000-00-00   ///
 ///////////////////////////////////////////////
-$date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+/* $date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
 $date2 = new DateTime( "0000-00-03T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
-
-echo ( $date1 )->format('c');
-echo '<br>';
-echo ( $date2 )->format('c');
 
 $d_zero_3 = $aligent->_daysBetween( $date1, $date2 ); //
 ( $d_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_zero', 1 , $d_zero ]);
 $d_wd_zero_3 = $aligent->_weekdays( $date1, $date2 ); //
 ( $d_wd_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_wd_zero_3', 1 , $d_wd_zero_3 ]);
 $d_cw_zero_3 = $aligent->_completeWeeks( $date1, $date2 ); //
-( $d_cw_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_cw_zero_3', 1 , $d_cw_zero_3 ]);
+( $d_cw_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_cw_zero_3', 1 , $d_cw_zero_3 ]); */
 
 /////////////////////////////////////////////
 //         Single test OOB                 ///
@@ -673,6 +836,7 @@ $date2 = new DateTime( "10000-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // 
 
 $d_oob = $aligent->_daysBetween( $date1, $date2 ); //
 ( $d_oob == 5865733 )? $pass++: array_push( $failarray, ['d_oob', 5865733 , $d_oob ]); */
+
 
 ############################################
 ##              RESULTS SCREEN            ##
