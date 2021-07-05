@@ -8,13 +8,25 @@ Class Aligent extends DateTime
 
     Public function _daysBetween( $date1, $date2, $flag = '' ){
         if( $this->_totalDays( $date1, $date2 ) > 0 ){
-            return $this->_totalDays( $date1, $date2 ) - 1;
+            if( is_int( $flag ) ){
+                $splice = $this->_getSplice( $flag );
+            } else {
+                $splice = 1; // its default
+            }
+            
+            return ( $this->_totalDays( $date1, $date2 ) - 1 ) * $this->_getSplice( $flag );
         }
 
         return 0;        
     }
 
     Public function _weekdays( $date1, $date2, $flag = '' ){
+
+        if( is_int( $flag ) ){
+            $splice = $this->_getSplice( $flag );
+        } else {
+            $splice = 1; // its default
+        }
 
         $days = $this->_daysBetween( $date1, $date2 );
         $weeks_difference = floor( $days / 7 ); // Define Days as Weeks
@@ -47,19 +59,35 @@ Class Aligent extends DateTime
             }
         } */
 
-        return $weekdays;
+        return $weekdays * $splice;
     }
 
     Public function _completeWeeks( $date1, $date2, $flag = '' ){
-        
-        $weeks = floor( $this->_daysBetween( $date1, $date2 ) / 7 );         
+        if( is_int( $flag ) ){
+            $splice = $this->_getSplice( $flag );
+        } else {
+            $splice = 1; // its default
+        }
 
-        return $weeks;
+        $weeks = floor( $this->_daysBetween( $date1, $date2 ) / 7 );
+        
+        if( $splice > 1 ){
+            return $weeks * 7 * $splice;
+        }
+
+        return $weeks * $splice;
     }
 
-    Private function  _getSpilce( $byTime ){
-        
-        return $splice;
+    Private function  _getSpilce( $flag ){
+        if( !is_null( $flag ) ){
+            $spliceArray = ['86400', '1400', '24', '31622400'];
+            ( $flag > 0 )?? $flag--; //adjust for array start  = 0
+            return $spliceArray[ $flag ];
+        } else {
+            return 1;
+        }
+
+        return 1;
     }
 
     /**
@@ -72,9 +100,9 @@ Class Aligent extends DateTime
      * 
      */
     Public function _getSplice( $flag ){
-        if( !is_null( $flag ) ){
-            $spliceArray = ['86400', '1400', '24', '31622400'];
-            ( $flag > 0 )?? $flag--;
+        if( is_int( $flag ) ){
+            $flag--; // array offset
+            $spliceArray = ['86400', '1400', '24', '31622400'];            
             return $spliceArray[ $flag ];
         } else {
             return 1; // as default days

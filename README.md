@@ -32,6 +32,7 @@
 ***
 ***
 ## Version 0.1.0
+### TEST = 3
 #### aligent.class.php
 * Add ``` _getSplice() ``` <br> Return an INT to handle flag call Y,H,I,S
 * Updated ``` _daysBetween() ``` <br> Returns days between
@@ -60,7 +61,7 @@
 ***
 ## Version 0.1.2
 ### Handling 14 ~ 720 Days including leap year tests 
-### TEST = 36
+### TEST = 42
 #### test.php
 * Add ``` +8 Days in Days, WeekDays, Complete Weeks ```
 * Add ``` +15 Days in Days, WeekDays, Complete Weeks ```
@@ -68,6 +69,23 @@
 * Add ``` +365 Leapyear Days in Days, WeekDays, Complete Weeks ```
 * Add ``` +730 Days in Days, WeekDays, Complete Weeks ```
 * Add ``` +731 Leapyear Days in Days, WeekDays, Complete Weeks ```
+#### Updated MarkDown File
+#### README.md
+***
+## Version 0.1.3
+### Handling Flag input of time
+### TEST = 150
+#### aligent.class.php
+* Updated ``` _daysBetween() ``` <br> Implements ```_getSplice() ```
+* Updated ``` _weekdays() ``` <br> Implements ```_getSplice() ```
+* Updated ``` _completeWeeks() ``` <br> Implements ```_getSplice() ```
+#### test.php
+* Add ``` +8 Days with splice times ```
+* Add ``` +15 Days with splice times ```
+* Add ``` +365 Days with splice times ```
+* Add ``` +365 Leapyear Days with splice times ```
+* Add ``` +730 Days with splice times ```
+* Add ``` +731 Leapyear Days with splice times ```
 #### Updated MarkDown File
 #### README.md
 ## Error Log
@@ -80,4 +98,5 @@
 1. Scaffold Built
 2. Testing with start = Monday 04/01/1988 ( Helps with leap year testing and years > 1000 )
 3. E1 Days returns 0
+4. E2 Days returns correct result
 
