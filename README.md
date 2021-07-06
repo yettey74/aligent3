@@ -213,7 +213,6 @@
 #### aligent.class.php
 * Updated ``` _dateTransform() ``` <br> Handles non DateTime objects
 #### test.php
-* Ommitted ``` Single test ZERO ``` <br> We can not work with DateTime object directly .. must us Format()
 * Ommitted ``` Single test ZERO+3 ``` <br> We can not work with DateTime object directly .. must us Format() 
 #### Updated MarkDown File
 #### README.md

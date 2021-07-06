@@ -831,7 +831,7 @@ $d_cw_zero = $aligent->_completeWeeks( $date1, $date2 ); //
 //         Single test ZERO+3             ///
 //  Start = 0000-00-00  End = 0000-00-00   ///
 ///////////////////////////////////////////////
-
+/* 
 $date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday // -001-11-30T00:00:00+00:00
 $date2 = new DateTime( "0000-00-03T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday // -001-12-03T00:00:00+00:00
 $d_zero_3 = $aligent->_daysBetween( $date1, $date2 ); //
@@ -840,7 +840,7 @@ $d_wd_zero_3 = $aligent->_weekdays( $date1, $date2 ); //
 ( $d_wd_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_wd_zero_3', 1 , $d_wd_zero_3 ]);
 $d_cw_zero_3 = $aligent->_completeWeeks( $date1, $date2 ); //
 ( $d_cw_zero_3 == 0 )? $pass++: array_push( $failarray, ['d_cw_zero_3', 0 , $d_cw_zero_3 ]);
-
+ */
 
 /////////////////////////////////////////////
 //         Single test OOB                 ///
