@@ -14,6 +14,14 @@ Class Aligent extends DateTime
         
         $pudding = 0; // 1970-01-01T00:00:00+00:00
 
+        if( is_object( $date ) ){
+            if( !( $date instanceof DateTime ) ){
+                return new DateTime( '0001-01-01T00:00:00');
+            } else {
+                return $date;
+            }
+        }
+
         if( !( $date instanceof DateTime ) ){
             //attempt transformation
              if( is_int( $date ) ){
@@ -60,6 +68,14 @@ Class Aligent extends DateTime
         return $date;
     }
 
+    /**
+     *  Checks if greater than max UNIX time
+     * 
+     * @param Datetime|String $date
+     * 
+     * @return Boolean
+     * 
+     */
     public function _isMax( $date ){
 
         if( !is_int( $date ) ){
@@ -67,16 +83,22 @@ Class Aligent extends DateTime
         }
 
         if( $date > 253402214400 ){
-            /* echo $date . ' is Beyond Max Date of 253402214400 '; */
             return true;
         }
 
         return false;
     }
 
+    /**
+     *  Checks if less than min UNIX time
+     * 
+     * @param Datetime|String $date
+     * 
+     * @return Boolean
+     * 
+     */
     public function _isMin( $date ){
         if( $date < -377736739200 ){
-            /* echo $date . ' is Beyond Min Date of -377736739200 '; */
             return true;
         }
 
@@ -135,13 +157,6 @@ Class Aligent extends DateTime
     Private function _totalDays( $date1, $date2 ){
         $date1 = $this->_dateTransform( $date1 );
         $date2 = $this->_dateTransform( $date2 );
-        /* if( !( $date1 instanceof DateTime ) ){           
-           $date1 = new DateTime( $date1 );
-        }
-
-        if( !( $date2 instanceof DateTime ) ){
-            $date2 = new DateTime( $date2 );
-        } */
 
         return $days = $date1->diff( $date2 )->format( '%a' );
     }

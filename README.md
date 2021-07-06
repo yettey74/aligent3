@@ -193,7 +193,6 @@
 * Added ``` _stringScrubber() ``` <br> 
 * Updated ``` _dateTransform() ``` <br> Returns a date object from string or int
 #### test.php
-
 #### Updated MarkDown File
 #### README.md
 ***
@@ -205,7 +204,17 @@
 #### test.php
 * Added ``` Single test ZERO ```
 * Added ``` Single test ZERO+3 ```
-* Added ``` Single test OOB  ```
+* Added ``` Single test OOB ```
+#### Updated MarkDown File
+#### README.md
+***
+## Version 0.2.5
+### TEST = 269 / 100%
+#### aligent.class.php
+* Updated ``` _dateTransform() ``` <br> Handles non DateTime objects
+#### test.php
+* Ommitted ``` Single test ZERO ``` <br> We can not work with DateTime object directly .. must us Format()
+* Ommitted ``` Single test ZERO+3 ``` <br> We can not work with DateTime object directly .. must us Format() 
 #### Updated MarkDown File
 #### README.md
 ***
@@ -216,28 +225,25 @@
 * E3 Returns wrong count when days < 8
 * E4 Returns wrong count when Year has Feb-29
 * E5 TEST d_wd_limit     Expect = 4189809 Result = 4189811 (there are 4014 leaps)
-* E6 TEST d_zero	     Expect = 1, Return = 0
+* E6 TEST d_zero	     Expect = 0, Return = 0
 * E7 TEST d_wd_zero_3	 Expect = 1, Return = 2
 * E8 TEST d_cw_zero_3    Expect = 1, Return = 0
 * E9 TEST d_td_1000_year Expect = 365 * 1000 + (leap years), Return = 365241
-* E10 TEST d_wc_1000_year Expect = 260 * 1000 + (leapyear offset -1 ), Return = 260887
+* E10 TEST d_wc_1000_year Expect = 260 * 1000 + (leapyear offset -1 ), Return = 260887 ( we minus 1 day per 1000 years )
 * E11 string with comma throws error
 * E12 string with \ throws error
 * E13 string with / throws error
 
 ## Whishlist
 * Microseconds need to be handled
+* Work with 12 hour clocks A / P flag
 * E5,6,7,8 are all related to DateTime Library ... try/catch required to test and scrub
+* E5 works only becuase the 2 object ===
 Input : 0000-00-00T00:00:00+00:00
 Output : -001-11-30T00:00:00+00:00
 
 Input : 0000-00-03T00:00:00+00:00
 Output : -001-12-03T00:00:00+00:00
-
-* OOB tests int .. need to check int is in range
-* OOb tests string .. need to check int is in range
-
-* Handle 
 
 ## Attended
 1. Scaffold Built
