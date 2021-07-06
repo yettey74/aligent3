@@ -10,17 +10,50 @@ Class Aligent extends DateTime
      * 
      */
     Private function _dateTransform( $date ){
-        $pudding = 599616000; // 1989-01-01T00:00:00+00:00
+        // check if in range first and mod to pudding if not true
+        
+        $pudding = 0; // 1970-01-01T00:00:00+00:00
 
         if( !( $date instanceof DateTime ) ){
             //attempt transformation
              if( is_int( $date ) ){
-                return new DateTime( date( 'Y-m-d', $date ), new DateTimeZone( "UTC" ) );
+                if( $this->_isMax( $date ) == true ){
+                    $date = $pudding;
+                }
+
+                if( $this->_isMin( $date ) == true ){
+                    $date = $pudding;                    
+                }
+
+                 try{
+                     if( new DateTime( date( 'Y-m-d H:i:s',  $date ) ) === false ){
+                         throw new Exception();
+                     } else {
+                        return new DateTime( date( 'Y-m-d H:i:s',  $date ) );
+                     }
+                } catch ( Exceptio $e ){
+                    return new DateTime( date( 'Y-m-d H:i:s',  $pudding ), new DateTimeZone( "UTC" ) );
+                }                
             }
  
             if( is_string( $date) ){
                 $date = $this->_stringScrubber( $date );
-                return new DateTime( date( 'Y-m-d', strtotime( $date ) ), new DateTimeZone( "UTC" ) );
+                if( $this->_isMax( $date ) == true ){
+                    $date = $pudding;
+                }
+
+                if( $this->_isMin( $date ) == true ){
+                    $date = $pudding;                    
+                }
+                try{
+                    if( new DateTime( date( 'Y-m-d H:i:s', strtotime( $date ) ), new DateTimeZone( "UTC" ) ) === false ){
+                    throw new Exception();
+                    } else {
+                        return new DateTime( date( 'Y-m-d H:i:s', strtotime( $date ) ), new DateTimeZone( "UTC" ) );
+                    }
+                } catch ( Exception $e ){
+                    return new DateTime( date( 'Y-m-d H:i:s', $date ), new DateTimeZone( "UTC" ) );
+                }               
             }             
         }
 
@@ -34,10 +67,8 @@ Class Aligent extends DateTime
         }
 
         if( $date > 253402214400 ){
-            //echo $date . ' is Beyond Max Date of 253402214400 ';
+            /* echo $date . ' is Beyond Max Date of 253402214400 '; */
             return true;
-        } else {
-            //echo $date . ' is within limits';
         }
 
         return false;
@@ -45,7 +76,7 @@ Class Aligent extends DateTime
 
     public function _isMin( $date ){
         if( $date < -377736739200 ){
-            echo $date . ' is Beyond Min Date of -377736739200 ';
+            /* echo $date . ' is Beyond Min Date of -377736739200 '; */
             return true;
         }
 
@@ -75,6 +106,12 @@ Class Aligent extends DateTime
         // lets start checking the date part first
         if( strpos( $date, ' ' ) == true ){
             // lets change them to hyphens to be consistent
+            $date = str_replace( 'T', 'UTC', $date );
+        }
+
+        // lets start checking the date part first
+        if( strpos( $date, ' ' ) == true ){
+            // lets change them to hyphens to be consistent
             $date = str_replace( ' ', 'T', $date );
         }
 
@@ -98,6 +135,13 @@ Class Aligent extends DateTime
     Private function _totalDays( $date1, $date2 ){
         $date1 = $this->_dateTransform( $date1 );
         $date2 = $this->_dateTransform( $date2 );
+        /* if( !( $date1 instanceof DateTime ) ){           
+           $date1 = new DateTime( $date1 );
+        }
+
+        if( !( $date2 instanceof DateTime ) ){
+            $date2 = new DateTime( $date2 );
+        } */
 
         return $days = $date1->diff( $date2 )->format( '%a' );
     }

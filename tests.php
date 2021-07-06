@@ -655,10 +655,24 @@ $date2 = new DateTime( "1001-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // F
 
 $d_td_1000_year = $aligent->_daysBetween( $date1, $date2 ); //
 ( $d_td_1000_year == 365241 )? $pass++: array_push( $failarray, ['d_td_1000_year', 365241 , $d_td_1000_year ]);
-$d_wc_1000_year = $aligent->_weekdays( $date1, $date2 ); //
-( $d_wc_1000_year == 260887 )? $pass++: array_push( $failarray, ['d_wc_1000_year', 260887 , $d_wc_1000_year ]);
+$d_wd_1000_year = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_1000_year == 260887 )? $pass++: array_push( $failarray, ['d_wd_1000_year', 260887 , $d_wd_1000_year ]);
 $d_cw_1000_year = $aligent->_completeWeeks( $date1, $date2 ); //
 ( $d_cw_1000_year == 52177 )? $pass++: array_push( $failarray, ['d_cw_1000_year', 52177 , $d_cw_1000_year ]);
+
+////////////////////////////////////////////
+//         Single test 2000 Years         ///
+//  Start = 0001-01-01  End = 2001-01-01   ///
+///////////////////////////////////////////////
+$date1 = new DateTime( "0001-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date2 = new DateTime( "2001-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+
+$d_td_2000_year = $aligent->_daysBetween( $date1, $date2 ); //
+( $d_td_2000_year == 730484 )? $pass++: array_push( $failarray, ['d_td_2000_year', 730484 , $d_td_2000_year ]);
+$d_wd_2000_year = $aligent->_weekdays( $date1, $date2 ); //
+( $d_wd_2000_year == 521776 )? $pass++: array_push( $failarray, ['d_wd_2000_year', 521776 , $d_wd_2000_year ]);
+$d_cw_2000_year = $aligent->_completeWeeks( $date1, $date2 ); //
+( $d_cw_2000_year == 104354 )? $pass++: array_push( $failarray, ['d_cw_2000_year', 104354 , $d_cw_2000_year ]);
 
 ////////////////////////////////////////
 //         Single test INT 0 Days     ///
@@ -803,7 +817,7 @@ $d_cw_string_1_year = $aligent->_completeWeeks( $date1, $date2 ); //
 //         Single test ZERO               ///
 //  Start = 0000-00-00  End = 0000-00-00   ///
 ///////////////////////////////////////////////
-/* $date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
+$date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
 $date2 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
 
 $d_zero = $aligent->_daysBetween( $date1, $date2 ); //
@@ -811,30 +825,35 @@ $d_zero = $aligent->_daysBetween( $date1, $date2 ); //
 $d_wd_zero = $aligent->_weekdays( $date1, $date2 ); //
 ( $d_wd_zero == 0 )? $pass++: array_push( $failarray, ['d_wd_zero', 0 , $d_wd_zero ]);
 $d_cw_zero = $aligent->_completeWeeks( $date1, $date2 ); //
-( $d_cw_zero == 0 )? $pass++: array_push( $failarray, ['d_cw_zero', 0 , $d_cw_zero ]); */
+( $d_cw_zero == 0 )? $pass++: array_push( $failarray, ['d_cw_zero', 0 , $d_cw_zero ]);
 
 ////////////////////////////////////////////
 //         Single test ZERO+3             ///
 //  Start = 0000-00-00  End = 0000-00-00   ///
 ///////////////////////////////////////////////
-/* $date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
-$date2 = new DateTime( "0000-00-03T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
+$date1 = new DateTime( "0000-00-00T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday // -001-11-30T00:00:00+00:00
+$date2 = new DateTime( "0000-00-03T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday // -001-12-03T00:00:00+00:00
 
 $d_zero_3 = $aligent->_daysBetween( $date1, $date2 ); //
-( $d_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_zero', 1 , $d_zero ]);
+( $d_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_zero_3', 1 , $d_zero_3 ]);
 $d_wd_zero_3 = $aligent->_weekdays( $date1, $date2 ); //
 ( $d_wd_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_wd_zero_3', 1 , $d_wd_zero_3 ]);
 $d_cw_zero_3 = $aligent->_completeWeeks( $date1, $date2 ); //
-( $d_cw_zero_3 == 1 )? $pass++: array_push( $failarray, ['d_cw_zero_3', 1 , $d_cw_zero_3 ]); */
+( $d_cw_zero_3 == 0 )? $pass++: array_push( $failarray, ['d_cw_zero_3', 0 , $d_cw_zero_3 ]);
+/* echo ( $date1 )->format('c') . '<br>';
+echo ( $date2 )->format('c') . '<br>'; */
+
+
+
 
 /////////////////////////////////////////////
 //         Single test OOB                 ///
 //  Start = -6060-02-29  End = 10000-01-01  ///
 ////////////////////////////////////////////////
-/* $date1 = "-10000-01-01T00:00:00Z"; // Thursday
+$date1 = "-10000-01-01T00:00:00Z"; // Thursday
 $date2 = "10000-01-01T00:00:00Z"; // Friday
 $d_oob = $aligent->_daysBetween( $date1, $date2 ); //
-( $d_oob == 0 )? $pass++: array_push( $failarray, ['d_oob', 0 , $d_oob ]); */
+( $d_oob == 0 )? $pass++: array_push( $failarray, ['d_oob', 0 , $d_oob ]);
 
 ############################################
 ##              RESULTS SCREEN            ##

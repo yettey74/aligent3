@@ -197,6 +197,18 @@
 #### Updated MarkDown File
 #### README.md
 ***
+## Version 0.2.4
+### TEST = 272 / 99.26% Successs
+#### aligent.class.php
+* Added ``` _isMax() ``` <br> Returns true if date > Max
+* Added ``` _isMin() ``` <br> Returns true if date < Min
+#### test.php
+* Added ``` Single test ZERO ```
+* Added ``` Single test ZERO+3 ```
+* Added ``` Single test OOB  ```
+#### Updated MarkDown File
+#### README.md
+***
 ***
 ## Error Log
 * E1 Days returns as 2 when Friday start and tueday end
@@ -238,5 +250,6 @@ Output : -001-12-03T00:00:00+00:00
 6. E9 Returns correct count of days
 7. E10 Returns correct count of weekdays
 8. E11 Returns formatted string
-8. E12 Returns formatted string
-8. E13 Returns formatted string
+9. E12 Returns formatted string
+10. E13 Returns formatted string
+11. E8 Updated as looking for wrong expect = 1, should expect = 0
