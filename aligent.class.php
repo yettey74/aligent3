@@ -294,7 +294,7 @@ Class Aligent extends DateTime
     }
 
     /**
-     *  Return Count of complete weeks $date2
+     *  Return Count of complete weeks
      * 
      * @param Datetime|String $date1, $date2
      * 
@@ -347,7 +347,7 @@ Class Aligent extends DateTime
      * Return the timeing requried to splice the day 
      * requested by api call
      * 
-     * @param Integer| BULL $flag
+     * @param Integer| $flag
      * 
      * @return Integer
      * 
