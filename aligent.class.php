@@ -1,7 +1,6 @@
 <?php
 Class Aligent extends DateTime 
 {
-
     /**
      *  Return date as an object from Integer or String
      * 
@@ -11,6 +10,8 @@ Class Aligent extends DateTime
      * 
      */
     Private function _dateTransform( $date ){
+        $pudding = 599616000; // 1989-01-01T00:00:00+00:00
+
         if( !( $date instanceof DateTime ) ){
             //attempt transformation
              if( is_int( $date ) ){
@@ -26,6 +27,31 @@ Class Aligent extends DateTime
         return $date;
     }
 
+    public function _isMax( $date ){
+
+        if( !is_int( $date ) ){
+            $date = strtotime( $date );
+        }
+
+        if( $date > 253402214400 ){
+            //echo $date . ' is Beyond Max Date of 253402214400 ';
+            return true;
+        } else {
+            //echo $date . ' is within limits';
+        }
+
+        return false;
+    }
+
+    public function _isMin( $date ){
+        if( $date < -377736739200 ){
+            echo $date . ' is Beyond Min Date of -377736739200 ';
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      *  Return formatted String for transformation to DateTime
      * 
@@ -34,7 +60,7 @@ Class Aligent extends DateTime
      * @return String
      * 
      */
-    Private function _stringScrubber( $date ){
+    function _stringScrubber( $date ){
          // lets start checking the date part first
          if( strpos( $date, '/' ) == true ){
             // lets change them to hyphens to be consistent

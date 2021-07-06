@@ -175,6 +175,28 @@
 #### Updated MarkDown File
 #### README.md
 ***
+## Version 0.2.2
+### TEST = 262 / 100% Successs
+#### aligent.class.php
+* Updated ``` _dateTransform() ``` <br> Removed scrubber
+* Removed ``` _stringScrubber() ``` <br> Already get correct result without scrubber
+#### test.php
+#### Updated MarkDown File
+#### README.md
+***
+## Version 0.2.3
+### TEST = 262 / 100% Successs
+#### aligent.class.php
+* Added ``` _stringScrubber() ``` <br> 'String ',' not being handled .. so its back again
+* Added ``` _isMax() ``` <br> Returns tru if date < Max
+* Added ``` _isMin() ``` <br>  Returns true if date > Min
+* Added ``` _stringScrubber() ``` <br> 
+* Updated ``` _dateTransform() ``` <br> Returns a date object from string or int
+#### test.php
+
+#### Updated MarkDown File
+#### README.md
+***
 ***
 ## Error Log
 * E1 Days returns as 2 when Friday start and tueday end
@@ -193,7 +215,7 @@
 
 ## Whishlist
 * Microseconds need to be handled
-* E5,6,7,8 are all related to DateTime Library ... write a function to adjust
+* E5,6,7,8 are all related to DateTime Library ... try/catch required to test and scrub
 Input : 0000-00-00T00:00:00+00:00
 Output : -001-11-30T00:00:00+00:00
 
@@ -202,6 +224,8 @@ Output : -001-12-03T00:00:00+00:00
 
 * OOB tests int .. need to check int is in range
 * OOb tests string .. need to check int is in range
+
+* Handle 
 
 ## Attended
 1. Scaffold Built

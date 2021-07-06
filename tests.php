@@ -831,12 +831,10 @@ $d_cw_zero_3 = $aligent->_completeWeeks( $date1, $date2 ); //
 //         Single test OOB                 ///
 //  Start = -6060-02-29  End = 10000-01-01  ///
 ////////////////////////////////////////////////
-/* $date1 = new DateTime( "-6060-02-29T00:00:00Z", new DateTimeZone( "UTC" ) ); // Thursday
-$date2 = new DateTime( "10000-01-01T00:00:00Z", new DateTimeZone( "UTC" ) ); // Friday
-
+/* $date1 = "-10000-01-01T00:00:00Z"; // Thursday
+$date2 = "10000-01-01T00:00:00Z"; // Friday
 $d_oob = $aligent->_daysBetween( $date1, $date2 ); //
-( $d_oob == 5865733 )? $pass++: array_push( $failarray, ['d_oob', 5865733 , $d_oob ]); */
-
+( $d_oob == 0 )? $pass++: array_push( $failarray, ['d_oob', 0 , $d_oob ]); */
 
 ############################################
 ##              RESULTS SCREEN            ##
